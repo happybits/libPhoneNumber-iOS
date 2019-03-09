@@ -12,6 +12,10 @@
 
 > ARC only, or add the **"-fobjc-arc"** flag for non-ARC
 
+## Updating metadata
+See this issue for instructions to update metadata to Google's latest
+https://github.com/iziz/libPhoneNumber-iOS/issues/258
+
 ## Update Log
 [https://github.com/iziz/libPhoneNumber-iOS/wiki/Update-Log](https://github.com/iziz/libPhoneNumber-iOS/wiki/Update-Log)
 
