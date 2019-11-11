@@ -543,7 +543,6 @@ static NSArray *GEO_MOBILE_COUNTRIES;
                                      @".", @".", @".", @"\uFF0E", nil];
 
     MOBILE_TOKEN_MAPPINGS = @{
-      @52: @"1",
       @54: @"9",
     };
   });

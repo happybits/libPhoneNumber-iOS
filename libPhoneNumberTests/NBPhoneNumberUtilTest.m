@@ -3258,8 +3258,8 @@ static NSArray *PhoneNumberDescEntryForNationalNumberPattern(NSString *numberPat
 }
 
 - (void)testGetCountryMobileToken {
-  XCTAssertEqualObjects(@"1",
-      [_aUtil getCountryMobileTokenFromCountryCode:[[_aUtil getCountryCodeForRegion:@"MX"] integerValue]]);
+  XCTAssertEqualObjects(@"9",
+      [_aUtil getCountryMobileTokenFromCountryCode:[[_aUtil getCountryCodeForRegion:@"AR"] integerValue]]);
   XCTAssertEqualObjects(@"",
       [_aUtil getCountryMobileTokenFromCountryCode:[[_aUtil getCountryCodeForRegion:@"SE"] integerValue]]);
 }

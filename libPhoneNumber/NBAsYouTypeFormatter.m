@@ -868,7 +868,19 @@ static const NSUInteger NBMinLeadingDigitsLength = 3;
       NSString *formattedNumber = [self.phoneUtil_ replaceStringByRegex:nationalNumber
                                                                   regex:pattern
                                                            withTemplate:numberFormat.format];
-      return [self appendNationalNumber_:formattedNumber];
+      // Check that we did not remove nor add any extra digits when we matched
+      // this formatting pattern. This usually happens after we entered the last
+      // digit during AYTF. Eg: In case of MX, we swallow mobile token (1) when
+      // formatted but AYTF should retain all the number entered and not change
+      // in order to match a format (of same leading digits and length) display
+      // in that way.
+      NSString *fullOutput = [self appendNationalNumber_:formattedNumber];
+      NSString *formattedNumberDigitsOnly = [_phoneUtil_ normalizeDiallableCharsOnly:fullOutput];
+        if ([formattedNumberDigitsOnly isEqual:_accruedInputWithoutFormatting_]) {
+            // If it's the same (i.e entered number and format is same), then it's
+            // safe to return this in formatted number as nothing is lost / added.
+            return fullOutput;
+        }
     }
   }
   return @"";
