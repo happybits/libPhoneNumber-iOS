@@ -8,9 +8,8 @@
 
  - NBPhoneNumberUtil
  - NBAsYouTypeFormatter
- - NBTextField.swift (Swift 3)
 
-> ARC only, or add the **"-fobjc-arc"** flag for non-ARC
+> ARC only
 
 ## Updating metadata
 See this issue for instructions to update metadata to Google's latest
@@ -26,16 +25,20 @@ https://rawgit.com/googlei18n/libphonenumber/master/javascript/i18n/phonenumbers
 
 Please report, if the above results are different from this iOS library.
 Otherwise, please create issue to following link below to request additional telephone numbers formatting rule.
-https://github.com/googlei18n/libphonenumber/issues
+https://github.com/google/libphonenumber/issues
 
 Metadata in this library was generated from that. so, you should change it first. :)
 
-## Install 
+## Install
 
 #### Using [CocoaPods](http://cocoapods.org/?q=libPhoneNumber-iOS)
 ```
 source 'https://github.com/CocoaPods/Specs.git'
 pod 'libPhoneNumber-iOS', '~> 0.8'
+```
+##### Installing libPhoneNumber Geocoding Features
+```
+pod 'libPhoneNumberGeocoding', :git => 'https://github.com/CocoaPods/Specs.git'
 ```
 
 #### Using [Carthage](https://github.com/Carthage/Carthage)
@@ -66,7 +69,7 @@ See sample test code from
 
 ## Usage - **NBPhoneNumberUtil**
 ```obj-c
- NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+ NBPhoneNumberUtil *phoneUtil = [NBPhoneNumberUtil sharedInstance];
  NSError *anError = nil;
  NBPhoneNumber *myNumber = [phoneUtil parse:@"6766077303"
                               defaultRegion:@"AT" error:&anError];
@@ -140,7 +143,9 @@ import libPhoneNumber_iOS
 override func viewDidLoad() {
     super.viewDidLoad()
 
-    let phoneUtil = NBPhoneNumberUtil()
+    guard let phoneUtil = NBPhoneNumberUtil.sharedInstance() else {
+        return
+    }
 
     do {
         let phoneNumber: NBPhoneNumber = try phoneUtil.parse("01065431234", defaultRegion: "KR")
@@ -156,7 +161,7 @@ override func viewDidLoad() {
 
 ## Usage - **NBAsYouTypeFormatter**
 ```obj-c
-    NBAsYouTypeFormatter *f = [[NBAsYouTypeFormatter alloc] initWithRegionCode:@"US"];
+ NBAsYouTypeFormatter *f = [[NBAsYouTypeFormatter alloc] initWithRegionCode:@"US"];
     NSLog(@"%@", [f inputDigit:@"6"]); // "6"
     NSLog(@"%@", [f inputDigit:@"5"]); // "65"
     NSLog(@"%@", [f inputDigit:@"0"]); // "650"
@@ -175,4 +180,12 @@ override func viewDidLoad() {
     NSLog(@"%@", [f inputString:@"16502532222"]); // 1 650 253 2222
 ```
 
-##### Visit [libphonenumber](https://github.com/googlei18n/libphonenumber) for more information or mail (zen.isis@gmail.com)
+## libPhoneNumberGeocoding
+
+For more information on libPhoneNumberGeocoding and its usage, please visit [libPhoneNumberGeocoding](https://github.com/iziz/libPhoneNumber-iOS/blob/master/libPhoneNumberGeocoding/README.md) for more information.
+
+## libPhoneNumberShortNumber
+
+For more information on libPhoneNumberShortNumber and its usage, please visit [libPhoneNumberShortNumber](https://github.com/iziz/libPhoneNumber-iOS/blob/master/libPhoneNumberShortNumber/README.md) for more information.
+
+##### Visit [libphonenumber](https://github.com/google/libphonenumber) for more information or mail (zen.isis@gmail.com)
